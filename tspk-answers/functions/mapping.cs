@@ -21,7 +21,7 @@ namespace tspk_answers.functions
             
 
             for (int i = 0; i < rightSideArray.Count; i++)
-                rightSide.Add(Utils.ConvertToPlainText(rightSideArray[i].ToString()));
+                rightSide.Add(Utils.ConvertToPlainText(rightSideArray[i].ToString()).Replace("{(rm)}", "(...)"));
            
         }
 

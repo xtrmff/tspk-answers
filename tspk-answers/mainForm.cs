@@ -155,11 +155,9 @@ namespace tspk_answers
                 
             }
         }
-
-        private void URLToKion_LinkClicked(object sender, LinkClickedEventArgs e)
+        private void sayThankTaxtBox_LinkClicked(object sender, LinkClickedEventArgs e)
         {
-            
-            System.Diagnostics.Process.Start(((RichTextBox)sender).Text);
+            System.Diagnostics.Process.Start("https://qiwi.com/n/HIPAC407 ");
         }
     }
 }

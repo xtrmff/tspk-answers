@@ -34,11 +34,11 @@
             // 
             // answerPanel
             // 
-            this.answerPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.answerPanel.AutoScroll = true;
             this.answerPanel.AutoSize = true;
+            this.answerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.answerPanel.Location = new System.Drawing.Point(0, 0);
-            this.answerPanel.MaximumSize = new System.Drawing.Size(785, 500);
+            this.answerPanel.MaximumSize = new System.Drawing.Size(0, 500);
             this.answerPanel.MinimumSize = new System.Drawing.Size(785, 500);
             this.answerPanel.Name = "answerPanel";
             this.answerPanel.Size = new System.Drawing.Size(785, 500);

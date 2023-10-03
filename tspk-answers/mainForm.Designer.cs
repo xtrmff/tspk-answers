@@ -34,7 +34,7 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.Credits = new System.Windows.Forms.TextBox();
             this.discordLogo = new System.Windows.Forms.PictureBox();
-            this.URLToKion = new System.Windows.Forms.RichTextBox();
+            this.sayThankTaxtBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.discordLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,26 +75,26 @@
             this.discordLogo.TabIndex = 2;
             this.discordLogo.TabStop = false;
             // 
-            // URLToKion
+            // sayThankTaxtBox
             // 
-            this.URLToKion.BackColor = System.Drawing.SystemColors.Control;
-            this.URLToKion.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.URLToKion.Font = new System.Drawing.Font("Calibri", 12F);
-            this.URLToKion.HideSelection = false;
-            this.URLToKion.Location = new System.Drawing.Point(48, 43);
-            this.URLToKion.Name = "URLToKion";
-            this.URLToKion.ReadOnly = true;
-            this.URLToKion.Size = new System.Drawing.Size(199, 19);
-            this.URLToKion.TabIndex = 4;
-            this.URLToKion.Text = "https://discord.gg/VXtytFshxc";
-            this.URLToKion.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.URLToKion_LinkClicked);
+            this.sayThankTaxtBox.BackColor = System.Drawing.SystemColors.Control;
+            this.sayThankTaxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.sayThankTaxtBox.Location = new System.Drawing.Point(64, 33);
+            this.sayThankTaxtBox.Name = "sayThankTaxtBox";
+            this.sayThankTaxtBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.sayThankTaxtBox.ShowSelectionMargin = true;
+            this.sayThankTaxtBox.Size = new System.Drawing.Size(187, 41);
+            this.sayThankTaxtBox.TabIndex = 3;
+            this.sayThankTaxtBox.Text = "Поблагодарить автора:\nВТБ: 2200 2404 4455 8627\nQIWI: https://qiwi.com/n/HIPAC407\n" +
+    "";
+            this.sayThankTaxtBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.sayThankTaxtBox_LinkClicked);
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 111);
-            this.Controls.Add(this.URLToKion);
+            this.Controls.Add(this.sayThankTaxtBox);
             this.Controls.Add(this.discordLogo);
             this.Controls.Add(this.Credits);
             this.Controls.Add(this.folderChooseBtn);
@@ -119,7 +119,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.TextBox Credits;
         private System.Windows.Forms.PictureBox discordLogo;
-        private System.Windows.Forms.RichTextBox URLToKion;
+        private System.Windows.Forms.RichTextBox sayThankTaxtBox;
     }
 }
 

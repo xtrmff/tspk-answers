@@ -17,10 +17,14 @@ namespace tspk_answers.functions
 
             for(int i = 0; i < answers.Count; i++)
             {
-                if (answers[i]["correct"].ToString() == "true") 
+                try
                 {
-                    rightAnswers.Add(Utils.ConvertToPlainText(answers[i]["question"].ToString()).Replace("{(rm)}", "(...)"));
+                    if (answers[i]["correct"].ToString() == "true")
+                    {
+                        rightAnswers.Add(Utils.ConvertToPlainText(answers[i]["question"].ToString()).Replace("{(rm)}", "(...)"));
+                    }
                 }
+                catch { continue; }
             }
         }
         public List<string> rightAnswers = new List<string>();            

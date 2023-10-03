@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace tspk_answers.functions
 {
@@ -64,7 +65,7 @@ namespace tspk_answers.functions
                 MaximumSize = new Size(700, 500),
                 ForeColor = Color.Green,
                 Dock = DockStyle.Fill,
-                TextAlign = System.Drawing.ContentAlignment.MiddleRight,
+                TextAlign = System.Drawing.ContentAlignment.TopRight,
             };
             tableLayoutPanel.Controls.Add(leftSide, 0, 0);
 
@@ -76,7 +77,7 @@ namespace tspk_answers.functions
                 MaximumSize = new Size(700, 500),
                 ForeColor = Color.Green,
                 Dock = DockStyle.Fill,
-                TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+                TextAlign = System.Drawing.ContentAlignment.TopLeft,
             };
             tableLayoutPanel.Controls.Add(rightSide, 1, 0);
 
@@ -89,7 +90,7 @@ namespace tspk_answers.functions
                     MaximumSize = new Size(700, 500),
                     ForeColor = Color.Green,
                     Dock = DockStyle.Fill,
-                    TextAlign = System.Drawing.ContentAlignment.MiddleRight,
+                    TextAlign = System.Drawing.ContentAlignment.TopRight,
                 };
                 tableLayoutPanel.Controls.Add(answLeft, 0, i);
             }
@@ -105,7 +106,7 @@ namespace tspk_answers.functions
                     MaximumSize = new Size(700, 500),
                     ForeColor = Color.Green,
                     Dock = DockStyle.Fill,
-                    TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+                    TextAlign = System.Drawing.ContentAlignment.TopLeft,
                 };
                 tableLayoutPanel.Controls.Add(answRight, 1, i);
             }
@@ -115,7 +116,7 @@ namespace tspk_answers.functions
         }
         public void drawMappingPictureAnswer(Mapping_picture answer)
         {
-            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.TopDown };
+            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.TopDown, Anchor = AnchorStyles.None, Dock = DockStyle.None };
             flowLayoutPanel.Paint += new PaintEventHandler(FlowLayoutPanel_paint);
 
             TableLayoutPanel tableLayoutPanel = new TableLayoutPanel
@@ -123,6 +124,7 @@ namespace tspk_answers.functions
                 AutoSize = true,
                 ColumnCount = answer.answers.Count,
                 RowCount = answer.answers.Count,
+                Anchor = AnchorStyles.None,
             };
 
             for(int i = 0; i < answer.picturesPath.Count; i++)
@@ -147,6 +149,7 @@ namespace tspk_answers.functions
                     ForeColor = Color.Green,
                     Dock = DockStyle.Fill,
                     TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                    Anchor = AnchorStyles.None,
                 };
                 tableLayoutPanel.Controls.Add(answ, i, 1);
             }
@@ -157,19 +160,18 @@ namespace tspk_answers.functions
         {
             FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel { FlowDirection = FlowDirection.TopDown, AutoSize = true};
             flowLayoutPanel.Paint += new PaintEventHandler(FlowLayoutPanel_paint);
-            
+            RichTextBox richTextBox = new RichTextBox
+            {
+                AutoSize = true,
+                Font = new Font(FontFamily.GenericSansSerif, 14),
+                BorderStyle = BorderStyle.None,
+                BackColor = answerPanel.BackColor,
+                ReadOnly = true,
+                Dock = DockStyle.Fill,
+
+            };
             for (int i = 0; i < answer.answers.Count; i++)
             {
-                RichTextBox richTextBox = new RichTextBox 
-                {
-                    AutoSize = true,
-                    Font = new Font(FontFamily.GenericSansSerif, 14),
-                    BorderStyle = BorderStyle.None,
-                    BackColor = answerPanel.BackColor,
-                    ReadOnly = true,
-                    Size = new Size(700, 100),
-                   
-                };
                 string regularText = string.Empty;
                 int lastIndex = 0;
                 List<int> index = utils.Utils.AllIndexesOf(answer.text[i], "{options_");
@@ -188,13 +190,12 @@ namespace tspk_answers.functions
                    
                     AppendFormattedText(richTextBox, regularText, Color.Black, false, HorizontalAlignment.Center);
                     if (j != index.Count)
-                        AppendFormattedText(richTextBox, answer.answers[i][j], Color.Green, true, HorizontalAlignment.Center);
+                        AppendFormattedText(richTextBox, " " + answer.answers[i][j] + " ", Color.Green, true, HorizontalAlignment.Center);
                     regularText = string.Empty;
                 }
-                flowLayoutPanel.Controls.Add(richTextBox);
+                AppendFormattedText(richTextBox, "\n\n", Color.Black, false, HorizontalAlignment.Center);
             }
-            
-            answerPanel.Controls.Add(flowLayoutPanel);
+            answerPanel.Controls.Add(richTextBox);
         }
         public void drawRadiobuttonAnswer(Radiobutton_text answer)
         {
@@ -261,54 +262,45 @@ namespace tspk_answers.functions
                 };
                 tableLayoutPanel.Controls.Add(title, i, 0);
             }
-            for (int i = 0, count = 0, rightColumn = 0, lastRightColumn = 0; i < answer.rightColumns.Count; i++) 
+
+            for(int i = 0, rowCount = 1; i < answer.columns.Count; i++)
             {
-                for(int j = 0; j < answer.columns.Count; j++)
+                for (int j = 0; j < answer.rightColumns.Count; j++)
                 {
-                    if(answer.rightColumns[i].Item2 == answer.columns[j])
+                    if (answer.rightColumns[j].Item2 == answer.columns[i])
                     {
-                        rightColumn = j;
-                        if(lastRightColumn == rightColumn)
-                            count++;
-                        else
+                        Label row = new Label
                         {
-                            count = 1;
-                            lastRightColumn = j;
-                        }
-                        break;
+                            Text = answer.rightColumns[j].Item1,
+                            Font = new Font(FontFamily.GenericSansSerif, 14),
+                            AutoSize = true,
+                            MaximumSize = new Size(700, 500),
+                            ForeColor = Color.Green,
+                            Dock = DockStyle.Fill,
+                            TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                        };
+                        tableLayoutPanel.Controls.Add(row, i, rowCount);
+                        rowCount++;
                     }
                 }
-                Label row = new Label
-                {
-                    Text = answer.rightColumns[i].Item1,
-                    Font = new Font(FontFamily.GenericSansSerif, 14),
-                    AutoSize = true,
-                    MaximumSize = new Size(700, 500),
-                    ForeColor = Color.Green,
-                    Dock = DockStyle.Fill,
-                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                };
-                tableLayoutPanel.Controls.Add(row, rightColumn, count);
+                rowCount = 1;
             }
             flowLayoutPanel.Controls.Add(tableLayoutPanel);
             answerPanel.Controls.Add(flowLayoutPanel);  
         }
         public void drawTextInAnswer(TextIn answer)
         {
-            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.TopDown };
-            flowLayoutPanel.Paint += new PaintEventHandler(FlowLayoutPanel_paint);
-
+            RichTextBox richTextBox = new RichTextBox
+            {
+                AutoSize = true,
+                Font = new Font(FontFamily.GenericSansSerif, 14),
+                BorderStyle = BorderStyle.None,
+                BackColor = answerPanel.BackColor,
+                ReadOnly = true,
+                Dock = DockStyle.Fill
+            };
             for (int i = 0; i < answer.answers.Count; i++)
             {
-                RichTextBox richTextBox = new RichTextBox
-                {
-                    AutoSize = true,
-                    Font = new Font(FontFamily.GenericSansSerif, 14),
-                    BorderStyle = BorderStyle.None,
-                    BackColor = answerPanel.BackColor,
-                    ReadOnly = true,
-                    Size = new Size(700, 200)
-                };
                 string regularText = string.Empty;
                 int lastIndex = 0;
                 List<int> index = utils.Utils.AllIndexesOf(answer.text[i], "{input");
@@ -327,24 +319,23 @@ namespace tspk_answers.functions
 
                     AppendFormattedText(richTextBox, regularText, Color.Black, false, HorizontalAlignment.Center);
                     if (j != index.Count)
-                        AppendFormattedText(richTextBox, answer.answers[i][j], Color.Green, true, HorizontalAlignment.Center);
+                        AppendFormattedText(richTextBox, " " + answer.answers[i][j] + " ", Color.Green, true, HorizontalAlignment.Center);
                     regularText = string.Empty;
                 }
-                flowLayoutPanel.Controls.Add(richTextBox);
+                AppendFormattedText(richTextBox, "\n\n", Color.Black, false, HorizontalAlignment.Center);
             }
-
-            answerPanel.Controls.Add(flowLayoutPanel);
+            answerPanel.Controls.Add(richTextBox);
         }
 
         private void FlowLayoutPanel_paint(object sender, PaintEventArgs e)
         {
-            if(!drawed)
+            if (!drawed)
             {
                 FlowLayoutPanel panel = sender as FlowLayoutPanel;
                 panel.Location = new Point((answerPanel.Width - panel.Width) / 2, (answerPanel.Height - panel.Height) / 2);
                 drawed = true;
             }
-           
+
         }
         private void AppendFormattedText(RichTextBox rtb, string text, Color textColor, Boolean isBold, HorizontalAlignment alignment)
         {

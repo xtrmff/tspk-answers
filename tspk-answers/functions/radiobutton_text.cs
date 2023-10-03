@@ -16,11 +16,15 @@ namespace tspk_answers.functions
             JArray answers = task["answers"] as JArray;
             for(int i = 0; i < answers.Count; i++) 
             {
-                if (answers[i]["correct"].ToString() == "true")
+                try
                 {
-                    rightAnswer = Utils.ConvertToPlainText(answers[i]["question"].ToString()).Replace("{(rm)}", "(...)");
-                    break;
+                    if (answers[i]["correct"].ToString() == "true")
+                    {
+                        rightAnswer = Utils.ConvertToPlainText(answers[i]["question"].ToString()).Replace("{(rm)}", "(...)");
+                        break;
+                    }
                 }
+                catch { continue; }
             }
         }
         public string rightAnswer;
