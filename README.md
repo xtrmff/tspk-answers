@@ -15,7 +15,7 @@
     <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/146880930/272380476-3a952eb9-5635-477b-8664-d3821db90437.png" alt="Пример">
   </li>
   <li>
-    Запускаете программу, и выбираете папку куда сохранили страницу<br>
+    Запускаете программу, и выбираете папку "Учебный курс_files"<br>
     <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/146880930/272381582-3f5fb3dc-6b5d-4944-ba4d-deed6aad5de2.png" alt="Файлы">
   </li>
   <li>
