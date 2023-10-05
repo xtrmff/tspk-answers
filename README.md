@@ -1,5 +1,8 @@
+
 <h1 align="center">Приложение для получения ответов по заданиям на ЦКП</h1> 
-<h3 align="left">Принцип использования, как получить ответы цкп: </h3>
+<h3 align="left" id="video-guide">Принцип использования, как получить ответы цкп (видео гайд):</h3>
+<video src="https://github-production-user-asset-6210df.s3.amazonaws.com/146880930/273017129-66163064-983e-43bc-91a5-5cde2a8448d0.mp4"></video>
+<h3 align="left" id="text-guide">Принцип использования, как получить ответы цкп (текстовый гайд): </h3>
 <ol>
   <li>Зайти на сайт <a href="https://e-learning.tspk-mo.ru/login/">ЦКП</a> и выбрать задание</li>
   <li>
